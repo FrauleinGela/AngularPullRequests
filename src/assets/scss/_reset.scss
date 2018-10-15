@@ -1,0 +1,17 @@
+// override scss from libraries
+* {
+  &:active,
+  :focus {
+      outline: none !important;
+  }
+}
+
+ul {
+  list-style-type: none !important;
+}
+.mat-button {
+  &.mat-primary {
+      color: #fff !important;
+      background-color: $link-color !important;
+  }
+}

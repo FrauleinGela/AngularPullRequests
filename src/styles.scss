@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import "assets/scss/variables";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/alert";
+@import "assets/scss/reset"; // if need to reset default css
+
+// TODO: Add scss/variables.scss as a global, to stop importing the file on every scss component
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
+    color: $color-text;
+}
