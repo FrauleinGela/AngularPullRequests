@@ -1,0 +1,31 @@
+@import "~src/assets/scss/variables";
+@import "~src/assets/scss/mixins";
+
+.loader-block {
+    color: $color-accent;
+    font-size: 18px;
+    display: -webkit-box; 
+    display: -moz-box;   
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; 
+    justify-content: center; 
+    padding: 10px 0;
+}
+
+.dots {
+  display: flex;
+}
+
+.dot-2 {
+  @include animation('dots 1.5s ease-out infinite');
+
+}
+
+.dot-3 {
+  @include animation('dots 2s ease-out infinite');
+}
+
+.dot-1 {
+  @include animation('dots 2.5s ease-out infinite');
+}
