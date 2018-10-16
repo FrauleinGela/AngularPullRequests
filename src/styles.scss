@@ -21,3 +21,8 @@ body {
     background-color: #ffffff;
     color: $color-text;
 }
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
