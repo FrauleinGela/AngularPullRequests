@@ -1,0 +1,9 @@
+<div *ngIf="error" class="error-block alert alert-danger" role="alert">
+  <strong class="error-block__head">
+    Error:
+    {{error.status}}
+  </strong>
+  <p class="error-block__body" *ngIf="error.error">
+    {{error.error.message}}
+  </p>
+</div>
