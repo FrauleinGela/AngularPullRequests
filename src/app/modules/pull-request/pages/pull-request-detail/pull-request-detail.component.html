@@ -1,0 +1,27 @@
+<div class="pullRequest-block text-center my-2 py-1">
+  <h2 class="pullRequest-block__head py-1">Pull Request detail</h2>
+  <div class="pullRequest-block__body">
+    <app-loader *ngIf="loading; else showPullRequest"></app-loader>
+    <ng-template #showPullRequest>
+      <div *ngIf="pullRequest" class="pullRequest__item px-2">
+        <div class="pullRequest__body py-3">
+          <p>
+            <b>id: </b> {{pullRequest.number}}
+          </p>
+          <p>
+            <b>State: </b> {{pullRequest.state}}
+          </p>
+          <p>
+            <b>Title: </b> {{pullRequest.title}}
+          </p>
+          <p>
+            <b>Body: </b> {{pullRequest.body}}
+          </p>
+          <p>
+            <b>Created at: </b> {{pullRequest.created_at}}
+          </p>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

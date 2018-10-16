@@ -1,0 +1,25 @@
+@import "~src/assets/scss/variables";
+
+.pullRequest-block {
+    .pullRequest-block__head {
+        border-left: solid 1px;
+        border-right: solid 1px;
+        border-top: solid 1px;
+        margin: 0;
+        border-color: #eeeeee;
+        background-color: #eeeeee;
+    }
+
+    .pullRequest-block__body {
+        word-wrap: break-word;
+        min-height: 400px;
+        border-radius: 3px;
+        border-left: solid 1px #eeeeee;
+        border-right: solid 1px #eeeeee;
+    }
+
+    .pullRequest__item {
+        color: $color-accent;
+        border-radius: 5px;
+    }
+}
