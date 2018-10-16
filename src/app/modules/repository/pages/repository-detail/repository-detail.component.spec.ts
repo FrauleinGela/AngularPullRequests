@@ -37,39 +37,36 @@ describe('RepositoryDetailComponent', () => {
     fixture = TestBed.createComponent(RepositoryDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.ngOnInit();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should loading be true and app-loader component visible', () => {
-    component.loading = true;
-    fixture.detectChanges();
+  it('should not app-loader component be visible', () => {
     const bannerDe: DebugElement = fixture.debugElement;
     const bannerEl: HTMLElement = bannerDe.nativeElement;
-    const appLoaderDom = bannerEl.querySelector('app-loader');
-    expect(appLoaderDom.textContent).toContain('Loading');
+    const appLoaderDom = bannerEl.querySelectorAll('app-loader');
+    expect(appLoaderDom.length).toBe(0);
   });
 
-  it('should loading and loadingPullRequests return false', () => {
-    component.ngOnInit();
-    expect(component.loading).toBe(false);
+  it('should loadingPullRequests (subscribes) return false', () => {
     expect(component.loadingPullRequests).toBe(false);
   });
 
   it('should return repository info', () => {
-    component.ngOnInit();
-    expect(component.repositoryInfo).toEqual(repositoryInfo);
+    const bannerDe: DebugElement = fixture.debugElement;
+    const bannerEl: HTMLElement = bannerDe.nativeElement;
+    const appLoaderDom = bannerEl.querySelector('.repository-block__header');
+    expect(appLoaderDom.textContent).toContain('github title');
   });
 
   it('should return pullRequests', () => {
-    component.ngOnInit();
     expect(component.pullRequestsPage.length).toEqual(pullRequestsData.pullRequests.length);
   });
 
   it('should change the PaginationService.pagination.page if $changePage is fired', fakeAsync(() => {
-    component.ngOnInit();
     const paginationService = TestBed.get(PaginationService);
     paginationService.changePageSource.next(3);
     fixture.detectChanges();

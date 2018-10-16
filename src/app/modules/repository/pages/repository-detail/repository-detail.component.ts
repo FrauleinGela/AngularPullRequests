@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { GithubService } from '../../../../core/services';
 import { Pagination, PullRequest, Repository } from '../../../../shared/models';
 import { PaginationService } from '../../../../shared/services';
@@ -9,10 +11,10 @@ import { PaginationService } from '../../../../shared/services';
   templateUrl: './repository-detail.component.html',
   styleUrls: ['./repository-detail.component.scss']
 })
-export class RepositoryDetailComponent implements OnInit {
+export class RepositoryDetailComponent implements OnInit, OnDestroy {
+  repositoryInfo$: Observable<Repository>;
   loading = false;
   loadingPullRequests = false;
-  repositoryInfo: Repository;
   pagination: Pagination = {
     per_page: 10,
     page: 1,
@@ -20,6 +22,7 @@ export class RepositoryDetailComponent implements OnInit {
   };
   pullRequestsLength = 0;
   pullRequestsPage: PullRequest[];
+  destroySubject$: Subject<void> = new Subject();
   constructor(
     private githubService: GithubService,
     private router: Router,
@@ -30,10 +33,10 @@ export class RepositoryDetailComponent implements OnInit {
   ngOnInit() {
     this.getRepositoryData();
     this.paginationService.pagination = this.pagination;
-    this.paginationService.$changePage.subscribe((page) => {
+    this.paginationService.$changePage.pipe(takeUntil(this.destroySubject$)).subscribe((page) => {
       this.updateRoutes(page);
     });
-    this.activatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.pipe(takeUntil(this.destroySubject$)).subscribe(params => {
       // if pagination.page is updated, get the new page(pull requests api)
       if (params.page && params.page !== '') {
         this.paginationService.pagination.page = Number(params.page);
@@ -43,11 +46,7 @@ export class RepositoryDetailComponent implements OnInit {
   }
 
   getRepositoryData() {
-    this.loading = true;
-    this.githubService.getInfo().subscribe((resp) => {
-      this.repositoryInfo = resp;
-      this.loading = false;
-    }, () => this.loading = false);
+    this.repositoryInfo$ = this.githubService.getInfo();
   }
 
   getPullRequests() {
@@ -68,7 +67,7 @@ export class RepositoryDetailComponent implements OnInit {
   }
 
   getPullRequestPage() {
-    this.getPullRequests().subscribe((resp) => {
+    this.getPullRequests().pipe(takeUntil(this.destroySubject$)).subscribe((resp) => {
       this.setPullRequestsPage(resp);
       this.loadingPullRequests = false;
     }, () => this.loadingPullRequests = false);
@@ -77,6 +76,10 @@ export class RepositoryDetailComponent implements OnInit {
   updateRoutes(page) {
     // index number starts from 0
     this.router.navigate(['angular'], { queryParams: { page: page + 1 } });
+  }
+
+  ngOnDestroy() {
+    this.destroySubject$.next();
   }
 
 }

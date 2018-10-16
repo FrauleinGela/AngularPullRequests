@@ -1,13 +1,14 @@
 <div class="repository-block">
-  <app-loader *ngIf="loading; else showData"></app-loader>
-  <ng-template #showData>
-    <div *ngIf="repositoryInfo" class="repository-block__header my-2 py-1 text-center">
-      <h1 class="repository-block__header-head">{{repositoryInfo.name}}</h1>
-      <p class="repository-block__header-body py-3">
-        {{repositoryInfo.description}}
-      </p>
-    </div>
+  <div *ngIf="repositoryInfo$ | async as repositoryInfo; else loading" class="repository-block__header my-2 py-1 text-center">
+    <h1 class="repository-block__header-head">{{repositoryInfo.name}}</h1>
+    <p class="repository-block__header-body py-3">
+      {{repositoryInfo.description}}
+    </p>
+  </div>
+  <ng-template #loading>
+    <app-loader></app-loader>
   </ng-template>
+
   <div class="repository-block__body text-center my-2 py-1">
     <h2 class="block-body__head py-1">Pull Requests</h2>
     <div class="block-body block-body__list">
@@ -15,15 +16,13 @@
       <ng-template #showPullRequests>
         <ul class="block-body__list-items">
           <li class="block-body__list-item py-3 item-detail px-2" *ngFor="let item of pullRequestsPage">
-            <a class="font-weight-bold item-detail__title py-2" 
-            routerLink="/pullrequest/{{item.number}}"
-             >{{item.title}}</a>
+            <a class="font-weight-bold item-detail__title py-2" routerLink="/pullrequest/{{item.number}}">{{item.title}}</a>
             <span class="item-detail__status">{{item.state}}</span>
-            
+
           </li>
         </ul>
+        <app-pagination [pagination]="pagination" [lengthItems]="pullRequestsLength"></app-pagination>
       </ng-template>
     </div>
-    <app-pagination [pagination]="pagination" [lengthItems]="pullRequestsLength"></app-pagination>
   </div>
 </div>
