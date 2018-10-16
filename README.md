@@ -1,6 +1,20 @@
 # AngularPullRequests
 Angular ng6 application, display Angular's Github info and pull requests (using the Github API)
 
+## Built With
+```
+npm install
+
+```
+## Run With
+```
+ng serve
+
+
+
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.5.
 
 ## Development server
