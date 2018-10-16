@@ -1,0 +1,5 @@
+<div class="pagination__block">
+  <mat-paginator [pageIndex]="pagination.page - 1" [length]="lengthItems" [pageSize]="pagination.per_page" [pageSizeOptions]="pagination.pageSizeOptions"
+    (page)="changePage($event)">
+  </mat-paginator>
+</div>
