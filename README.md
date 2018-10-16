@@ -1,12 +1,12 @@
 # AngularPullRequests
 Angular ng6 application, display Angular's Github info and pull requests (using the Github API)
 
-## Built With
+## Build
 ```
 npm install
 
 ```
-## Run With
+## Run 
 ```
 ng serve
 ```
