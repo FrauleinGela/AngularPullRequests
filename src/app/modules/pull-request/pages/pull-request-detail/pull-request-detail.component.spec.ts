@@ -5,6 +5,7 @@ import { GithubService } from 'src/app/core';
 import { pullRequestsData } from '../../../../core/mocks';
 import { SharedModule } from '../../../../shared/shared.module';
 import { PullRequestDetailComponent } from './pull-request-detail.component';
+import { DebugElement } from '@angular/core';
 
 describe('PullRequestDetailComponent', () => {
   let component: PullRequestDetailComponent;
@@ -40,15 +41,18 @@ describe('PullRequestDetailComponent', () => {
     fixture = TestBed.createComponent(PullRequestDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.ngOnInit();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should return pullRequest', () => {
-    component.ngOnInit();
-    expect(component.pullRequest).toEqual(pullRequestMockData);
+  it('should display pullRequest', () => {
+    const bannerDe: DebugElement = fixture.debugElement;
+    const bannerEl: HTMLElement = bannerDe.nativeElement;
+    const appLoaderDom = bannerEl.querySelector('.pullRequest__item');
+    expect(appLoaderDom.textContent).toContain('open request test');
   });
 
 });

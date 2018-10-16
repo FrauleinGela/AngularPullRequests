@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { GithubService } from '../../../../core/services';
 import { PullRequest } from '../../../../shared/models';
 
@@ -10,7 +11,7 @@ import { PullRequest } from '../../../../shared/models';
 })
 export class PullRequestDetailComponent implements OnInit {
   loading = false;
-  pullRequest: PullRequest;
+  pullRequest$: Observable<PullRequest>;
   constructor(
     private githubService: GithubService,
     private route: ActivatedRoute
@@ -22,12 +23,6 @@ export class PullRequestDetailComponent implements OnInit {
   }
 
   getInfo(id) {
-    this.loading = true;
-    this.githubService.getPullRequest(id).subscribe((resp) => {
-      this.pullRequest = resp;
-      this.loading = false;
-    }, () => {
-      this.loading = false;
-    });
+    this.pullRequest$ = this.githubService.getPullRequest(id);
   }
 }
