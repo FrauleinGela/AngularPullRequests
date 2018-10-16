@@ -1,0 +1,30 @@
+<div class="repository-block">
+  <app-loader *ngIf="loading; else showData"></app-loader>
+  <ng-template #showData>
+    <div *ngIf="repositoryInfo" class="repository-block__header my-2 py-1 text-center">
+      <h1 class="repository-block__header-head">{{repositoryInfo.name}}</h1>
+      <p class="repository-block__header-body py-3">
+        {{repositoryInfo.description}}
+      </p>
+    </div>
+  </ng-template>
+  <div class="repository-block__body text-center my-2 py-1">
+    <h2 class="block-body__head py-1">Pull Requests</h2>
+    <div class="block-body block-body__list">
+      <app-loader *ngIf="loadingPullRequests; else showPullRequests"></app-loader>
+      <ng-template #showPullRequests>
+        <ul class="block-body__list-items">
+          <li class="block-body__list-item py-3" *ngFor="let item of pullRequestsPage">
+            <div class="item-detail">
+              <a class="font-weight-bold item-detail__title" 
+              routerLink="/pullrequest/{{item.number}}"
+               >{{item.title}}</a>
+              <span class="item-detail__status">{{item.state}}</span>
+            </div>
+          </li>
+        </ul>
+      </ng-template>
+    </div>
+    <app-pagination [pagination]="pagination" [lengthItems]="pullRequestsLength"></app-pagination>
+  </div>
+</div>

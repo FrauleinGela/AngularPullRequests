@@ -1,0 +1,60 @@
+@import "~src/assets/scss/variables";
+
+.repository-block {
+    .repository-block__header {
+        .repository-block__header-body {
+            border-left: 8px #eeeeee solid;
+            border-bottom: 1px #eeeeee solid;
+            border-right: 1px #eeeeee solid;
+        }
+
+        .repository-block__header-head {
+            margin: 0;
+            border-left: 8px $border-color solid;
+            background-color: $color-default;
+            text-transform: uppercase;
+        }
+    }
+
+    .repository-block__body {
+        .block-body__head {
+            border-left: solid 1px;
+            border-right: solid 1px;
+            border-top: solid 1px;
+            margin: 0;
+            border-color: #eeeeee;
+            background-color: #eeeeee;
+        }
+
+        .block-body__list {
+            min-height: 400px;
+            border-radius: 3px;
+            border-left: solid 1px #eeeeee;
+            border-right: solid 1px #eeeeee;
+
+            .item-detail {
+                .item-detail__status {
+                    padding: 5px;
+                    color: $color-accent;
+                    border: 1px solid $color-accent;
+                    border-radius: 5px;
+                    margin: 5px;
+                }
+            }
+        }
+
+        .block-body__list-items {
+            padding: 0px;
+
+            .block-body__list-item {
+                width: 100%;
+                border-top: 1px solid #e1e4e8;
+            }
+
+            .block-body__list-item:hover {
+                border-top: 1px solid #eeeeee;
+                background-color: $color-default;
+            }
+        }
+    }
+}
