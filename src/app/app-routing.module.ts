@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'angular',
     loadChildren: './modules/repository/repository.module#RepositoryModule'
+  },
+  {
+    path: 'pullrequest',
+    loadChildren: './modules/pull-request/pull-request.module#PullRequestModule'
   }
 ];
 
