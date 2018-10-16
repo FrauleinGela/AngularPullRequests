@@ -1,0 +1,46 @@
+// Add cross browser keyframes
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+      @content;
+  }
+
+  @-moz-keyframes #{$animation-name} {
+      @content;
+  }
+
+  @-ms-keyframes #{$animation-name} {
+      @content;
+  }
+
+  @-o-keyframes #{$animation-name} {
+      @content;
+  }
+
+  @keyframes #{$animation-name} {
+      @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
+@include keyframes(dots) {
+  50% {
+      transform: translateY(5px);
+      -webkit-transform: translateY(-5px);
+      -ms-transform: translateY(-5px);
+      transform: translateY(-5px);
+  }
+
+  100% {
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+      transform: translateY(0);
+  }
+}
